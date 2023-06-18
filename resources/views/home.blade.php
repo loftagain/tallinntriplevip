@@ -4,14 +4,17 @@
     @php
         use App\Models\Post;
 
-        $posts = Post::all();
+        $posts = Post::with('user')->where('user_id', auth()->user()->id)->get();
     @endphp
+    {{ __('Welcome back, :nickname!', ['nickname' => auth()->user()->nickname]) }}
+
+
 
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header"><h1>Add a new post!</h1></div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -20,8 +23,7 @@
                             </div>
                         @endif
 
-                        {{ __('You are logged in!') }}
-
+                    
                         <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
@@ -46,13 +48,12 @@
                             </div>
 
                             <input type="hidden" name="submitted_at" value="{{ now() }}">
-                            <input type="hidden" name="author" value="{{ auth()->user()->name }}">
 
-                            <button type="submit" class="btn btn-primary">Submit Post</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
                         <div class="mt-4">
-                            <h2>Posts</h2>
+                            <h2>My posts</h2>
                             @foreach ($posts as $post)
                                 <div class="card mt-2">
                                     <div class="card-body">
@@ -60,10 +61,10 @@
                                         <p class="card-text">{{ $post->description }}</p>
                                         <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Photo">
 
-                                        <p class="card-text">Author: {{ $post->author_name }}</p>
+                                        <p class="card-text">Author: {{ $post->user->nickname }}</p>
                                         <p class="card-text">Submitted at: {{ $post->submitted_at }}</p>
-                                        
-                                        
+                                        <p class="card-text">Votes: {{ $post->votes_count }}</p>
+
                                         @if(auth()->user()->id === $post->user_id)
                                             <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                                 @csrf

@@ -57,6 +57,11 @@
             object-fit: cover;
             margin-bottom: 10px;
         }
+
+        .vote-btn[disabled] {
+            background-color: gray;
+            cursor: not-allowed;
+        }
     </style>
 
     <div class="container">
@@ -75,11 +80,17 @@
                                     {{ $post->description }}
                                 @endif
                             </p>
+                            <p class="card-text">Posted by: {{ $post->user->nickname }}</p>
+                            <p class="card-text">Posted on: {{ $post->created_at }}</p>
                             <p class="card-text">Votes: {{ $post->votes }}</p>
-                            <form action="{{ route('vote.store', $post->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Vote</button>
-                            </form>
+                            @if ($post->hasVoted)
+                                <button class="btn btn-primary vote-btn" disabled>Already Voted</button>
+                            @else
+                                <form action="{{ route('posts.vote', $post->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary vote-btn" id="vote-btn-{{ $post->id }}">Vote</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

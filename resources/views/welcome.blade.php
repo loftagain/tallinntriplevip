@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to My Website</title>
+    <title>Tallinn Triple VIP</title>
     <style>
         body {
-            background-image: url('{{ asset('images/jkkk.jpg') }}');
+            background-image: url('{{ asset('images/background.jpg') }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -12,6 +12,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-y:hidden;
         }
 
         .content {
@@ -30,12 +31,12 @@
         }
         .container  {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 300px; /* Set the width of the sidebar */
+  width: 450px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
   right: 0;
-  background-color: #4d4d4d; 
+  background-color: rgb(255, 214, 51);
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
 }
@@ -49,7 +50,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Welcome</div>
+                    <div class="card-header"></div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -101,11 +102,7 @@
                                         Login
                                     </button>
 
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Forgot Your Password?
-                                        </a>
-                                    @endif
+                                    
                                     <br><a href="{{ route('register') }}" class="btn btn-primary">Register Now</a>
 
                                 </div>
@@ -119,9 +116,8 @@
 @endsection
 
     <div class="content">
-        <h1>Welcome to My Website</h1>
-        {{-- <a href="{{ route('auth.login.facebook') }}" class="login-button">Login with Facebook</a> --}}
-
+        <h1></h1>
+        
     </div>
 </body>
 </html>
