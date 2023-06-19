@@ -63,7 +63,7 @@
 
                                         <p class="card-text">Author: {{ $post->user->nickname }}</p>
                                         <p class="card-text">Submitted at: {{ $post->submitted_at }}</p>
-                                        <p class="card-text">Votes: {{ $post->votes_count }}</p>
+                                        <p class="card-text">Votes: {{ $post->votes}}</p>
 
                                         @if(auth()->user()->id === $post->user_id)
                                             <form action="{{ route('posts.destroy', $post->id) }}" method="POST">

@@ -5,49 +5,33 @@ use App\Models\User;
 use App\Models\Post;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VoteController extends Controller
 {
-    public function vote(Request $request, $postId)
+    public function submitVote(Request $request, $postId)
 {
-    $post = Post::find($postId);
     $user = Auth::user();
-
-    if ($post->votes()->where('user_id', $user->id)->exists()) {
-        return redirect()->back()->with('error', 'You have already voted for this post.');
-    }
-
-    $post->votes()->attach($user->id);
-
-    return redirect()->back();
-}
-    public function store(Request $request, $postId)
-{
     $post = Post::findOrFail($postId);
-    
-    // Check if the user has already voted for this post
-    $existingVote = Vote::where('post_id', $post->id)
-        ->where('user_id', auth()->user()->id)
-        ->first();
-    
-    if ($existingVote) {
-        // User has already voted, handle the appropriate action (e.g., show an error message)
-        return redirect()->back()->with('error', 'You have already voted for this post.');
+
+    // Check if the user has already voted on the post
+    if ($post->votes()->where('user_id', $user->id)->exists()) {
+        // Handle the case when the user has already voted
+        // You can redirect back with a message or show an error
+        return redirect()->back()->with('error', 'You have already voted on this post.');
     }
-    
-    // Create a new Vote record
+
+    // Create a new vote
     $vote = new Vote();
+    $vote->user_id = $user->id;
     $vote->post_id = $post->id;
-    $vote->user_id = auth()->user()->id;
     $vote->save();
-    
-    // Increment the vote count on the post
+
+    // Increment the vote count for the post
     $post->increment('votes');
-    
-    // Handle the appropriate action after voting (e.g., redirect back to the vote page)
+
+    // Redirect back with a success message or to a success page
     return redirect()->back()->with('success', 'Vote submitted successfully.');
 }
 
-    
-    
 }

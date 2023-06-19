@@ -49,7 +49,7 @@ class PostController extends Controller
         return redirect()->route('home')->with('success', 'Post created successfully!');
     }
 
-    public function vote(Request $request, Post $post)
+    /*public function vote(Request $request, Post $post)
 {
     $user = $request->user();
 
@@ -65,7 +65,7 @@ class PostController extends Controller
     $post->increment('votes');
 
     return redirect()->route('dashboard')->with('success', 'Vote added successfully.');
-}
+}*/
 
 
 

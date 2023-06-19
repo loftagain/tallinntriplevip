@@ -83,14 +83,20 @@
                             <p class="card-text">Posted by: {{ $post->user->nickname }}</p>
                             <p class="card-text">Posted on: {{ $post->created_at }}</p>
                             <p class="card-text">Votes: {{ $post->votes }}</p>
-                            @if ($post->hasVoted)
-                                <button class="btn btn-primary vote-btn" disabled>Already Voted</button>
+                            @auth
+                                @if ($post->hasVoted)
+                                    <button class="btn btn-primary vote-btn" disabled>Already Voted</button>
+                                @else
+                                    <form action="{{ route('posts.vote', ['postId' => $post->id]) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary vote-btn" id="vote-btn-{{ $post->id }}">Vote</button>
+                                    </form>
+                                @endif
                             @else
-                                <form action="{{ route('posts.vote', $post->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary vote-btn" id="vote-btn-{{ $post->id }}">Vote</button>
-                                </form>
-                            @endif
+                                <!-- Show a message or link to the login page for non-authenticated users -->
+                                <p>Please login to vote</p>
+                                <a href="{{ route('login') }}">Login</a>
+                            @endauth
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function votes(): HasMany
+    public function votes()
     {
         return $this->hasMany(Vote::class);
     }

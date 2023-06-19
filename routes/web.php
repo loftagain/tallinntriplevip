@@ -3,6 +3,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\VoteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +12,13 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/vote', function () {
+    $posts = App\Models\Post::all(); // Retrieve all posts from the database
+
+    return view('vote', ['posts' => $posts]);
+})->name('vote');
+
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 
@@ -24,8 +32,6 @@ Auth::routes();
 Route::post('/post', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'destroy'])->name('posts.destroy');
 
-Route::get('/vote', [App\Http\Controllers\PostController::class, 'vote'])->name('vote');
-Route::post('/vote/{id}', [App\Http\Controllers\PostController::class, 'storeVote'])->name('vote.store');
+//jaunie:
+Route::post('/posts/{postId}/vote', [App\Http\Controllers\VoteController::class, 'submitVote'])->name('posts.vote');
 
-
-Route::post('/posts/{post}/vote', [App\Http\Controllers\PostController::class, 'vote'])->name('posts.vote');
