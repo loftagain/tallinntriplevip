@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\WallController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,11 +15,18 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/vote', function () {
-    $posts = App\Models\Post::all(); // Retrieve all posts from the database
+    $posts = App\Models\Post::orderBy('submitted_at','desc')->get(); // Retrieve all posts from the database
 
     return view('vote', ['posts' => $posts]);
 })->name('vote');
 
+Route::get('/wall', [WallController::class, 'index'])->name('wall');
+
+Route::get('/about', function () {
+    $posts = App\Models\Post::orderBy('submitted_at','desc')->get(); // Retrieve all posts from the database
+
+    return view('dashboard');
+})->name('about');
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 

@@ -38,8 +38,61 @@
   right: 0;
   background-color: rgb(255, 214, 51);
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-}
+  padding-top: 20px;}
+  .virsraksts, h1{
+        position: center;
+        text-align: center;
+        font:bold;
+        color:rgb(255, 255, 255);
+        font-size: 2rem;
+       text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        border-radius:4px;
+        margin-bottom: 5px;
+    }
+    h1{
+        color:black;
+        text-shadow:none;
+        font-size: 1.5em;
+        margin: 30px 15px 15px;
+    }
+    .card {
+        position: relative;
+top: 1em;
+align-self: center;
+        margin: 15px 15px 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+        border-radius: 6px;
+        
+        background-color: rgba(255, 214, 51);
+
+    }
+    .card-body {
+        padding: 15px 15px 15px;
+        align-content: center;
+    }
+    .card2{
+position: relative;
+top: 1em;
+
+    }
+    .card2 a.active{
+        background-color: black;
+        color: white;
+        margin: 5px 5px 5px;
+        margin-bottom: 20px;
+        width:150px;
+        display: inline-block;
+        
+        padding: 5px 5px 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none;
+    }
+    .card2 a:hover {
+          color: rgba(255, 214, 51);
+          
+        }
     </style>
 </head>
 <body>
@@ -49,9 +102,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <div class="virsraksts">Welcome to the most popular pancake destination!</div>
+<h1>Become a member, dictate our monthly specials and earn free premium meals!</h1>
                 <div class="card">
-                    <div class="card-header"></div>
-
+                    
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
@@ -110,14 +164,18 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> 
+              <div class="card2">
+        <h1>
+            <a class="active" href="{{ route('wall') }}">Wall</a><br>
+            <a class="active" href="{{ route('about') }}">About Us</a>
+        </h1>
+        
+    </div>
         </div>
     </div>
 @endsection
 
-    <div class="content">
-        <h1></h1>
-        
-    </div>
+ 
 </body>
 </html>
