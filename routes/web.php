@@ -14,18 +14,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/vote', function () {
-    $posts = App\Models\Post::orderBy('submitted_at','desc')->get(); // Retrieve all posts from the database
+Route::get('/vote', [PostController::class, 'index'])->name('vote');
 
-    return view('vote', ['posts' => $posts]);
-})->name('vote');
 
 Route::get('/wall', [WallController::class, 'index'])->name('wall');
 
 Route::get('/about', function () {
-    $posts = App\Models\Post::orderBy('submitted_at','desc')->get(); // Retrieve all posts from the database
-
-    return view('dashboard');
+    return view('about');
 })->name('about');
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');

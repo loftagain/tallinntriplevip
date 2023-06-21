@@ -13,7 +13,7 @@
         text-align: center;
         font:bold;
         color:rgb(255, 255, 255);
-        font-size: 2rem;
+        font-size: 22pt;
        text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
         border-radius:4px;
         margin-bottom: 5px;

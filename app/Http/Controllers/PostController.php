@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    public function index()
+{
+    // Get the current month and year
+    $currentMonth = now()->format('m');
+    $currentYear = now()->format('Y');
+
+    // Retrieve the posts posted during the current month and year
+    $posts = Post::whereMonth('submitted_at', $currentMonth)
+                 ->whereYear('submitted_at', $currentYear)
+                 ->orderBy('submitted_at', 'desc')
+                 ->get();
+
+    return view('vote', compact('posts'));
+}
+
     public function __construct()
     {
         $this->middleware('auth'); // Apply the 'auth' middleware to all methods in the controller

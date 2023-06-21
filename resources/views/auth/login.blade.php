@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+        body {
+            background-image: url('{{ asset('images/background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+       
+            overflow-y:hidden;
+        }
+        .card {
+            position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    width:30%;
+     justify-content: center;
+     align-content: center;
+     text-align: center;
+     padding:5px 5px 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: rgba(255, 214, 51);
+
+    }
+
+    .card-body {
+        padding: 0px 15px 15px;
+    }
+    </style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -56,7 +89,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
-
+                                <br><a href="{{ route('register') }}" class="btn btn-primary">Register Now</a>
                                 
                             </div>
                         </div>
