@@ -1,14 +1,20 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tinymce@5.9.2/themes/silver/theme.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tinymce@5.9.2/tinymce.min.js"></script>
+
+<link rel="stylesheet" href="{{ asset('css/tiny-mce/skins/ui/oxide/skin.min.css') }}">
+<script src="{{ asset('tiny-mce/tinymce.min.js') }}"></script>
+<script src="{{ asset('tinymce-config.js') }}"></script>
+
+
 <style>
     body {
         background-image: url('{{ asset('images/background70.jpg') }}');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-            height: 100vh;
-       
-            overflow-y:hidden;
+    
     }
     .virsraksts{
         position: center;
@@ -79,9 +85,48 @@
     .expandable {
         white-space: normal;
     }
+    /*papildu admin*/
+.tinymce-editor{
+    width: 100px;
+}
+.cardblog {
+    margin: 0 auto; /* Center the card horizontally */
+    margin-bottom: 20px;
+    align-content: center;
+   
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    padding: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: rgba(255, 214, 51);
+
+  margin-top:20px;
+    width: 45%;
+    padding: 10px; 
+}
+
+/*.cardwithin {
+    margin: 10px 0;
+    justify-content: left;
+    background-color: rgba(255, 214, 51);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
+    padding: 10px; 
+    max-width: 100%;
+    padding: 15px 15px 15px;
+}*/
+
+.cardblog + .cardblog {
+margin-top: 20px;
+}   
+
+
 </style>
 
-<div class="virsraksts">Top Voted Posts</div>
+<div class="virsraksts">We will pick a winner from:</div>
 <div class="container">
     <div class="row">
         <div class="col-md-12 top-posts">
@@ -97,11 +142,34 @@
             @endforeach
         </div>
     </div>
-
+    @if (Auth::check() && Auth::user()->hasRole('admin'))
     <div class="row blogs">
         <div class="col-md-8 offset-md-2">
             <div class="virsraksts">Blog Entries</div>
             <!-- Add your form or other content to submit new blog entries -->
+           <div>
+    <!-- Display the form for adding a blog entry -->
+    <form action="{{ route('blog.store') }}" method="POST">
+        @csrf
+        
+        <textarea name="content" class="tinymce-editor"></textarea>
+    
+        <button type="submit">Add Blog Entry</button>
+    </form></div>
+    @else 
+    <div class="virsraksts">Previous winners + news!</div>
+@endif
+
+<!-- Display existing blog entries -->
+@foreach ($blogs as $blog)
+
+    <div class="cardblog">
+
+        <div>{!! $blog->content !!}</div>
+    </div>
+@endforeach
+
+
         </div>
     </div>
 </div>

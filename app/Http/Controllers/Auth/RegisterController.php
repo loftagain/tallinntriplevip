@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -71,5 +72,6 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'password' => Hash::make($data['password']),
         ]);
+      
     }
 }

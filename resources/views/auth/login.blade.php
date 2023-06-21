@@ -32,7 +32,7 @@
     .card-body {
         padding: 0px 15px 15px;
     }
-    </style>
+</style>
 
 <div class="container">
     <div class="row justify-content-center">

@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\WallController;
+use App\Http\Controllers\BlogController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,3 +39,10 @@ Route::delete('/posts/{post}', [App\Http\Controllers\PostController::class, 'des
 //jaunie:
 Route::post('/posts/{postId}/vote', [App\Http\Controllers\VoteController::class, 'submitVote'])->name('posts.vote');
 
+//šeit glabā blog entry
+Route::post('/wall', [App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
+
+//Route::get('/wall', [App\Http\Controllers\BlogController::class, 'wall'])->name('blog.wall');
+
+//?
+Route::post('users/{id}/make-admin', 'UserController@makeAdmin')->name('users.make-admin');

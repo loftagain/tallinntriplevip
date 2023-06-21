@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\BlogEntry;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -14,9 +15,21 @@ class WallController extends Controller
      */
     public function index()
     {
-        $topPosts = Post::orderBy('votes', 'desc')->take(3)->get();
+        // Get the current month and year
+    $currentMonth = now()->format('m');
+    $currentYear = now()->format('Y');
 
-    return view('wall', compact('topPosts'));
+    // Retrieve the posts posted during the current month and year
+    $topPosts = Post::whereMonth('submitted_at', $currentMonth)
+                 ->whereYear('submitted_at', $currentYear)
+                 ->orderBy('votes', 'desc')
+                 ->take(3)
+                 ->get();
+                
+    $blogs = BlogEntry::all();
+
+
+    return view('wall', compact('topPosts'), compact('blogs'));
     }
 
     /**

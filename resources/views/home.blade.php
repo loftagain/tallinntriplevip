@@ -15,6 +15,7 @@
         background-image: url('{{ asset('images/background70.jpg') }}');
         background-size: cover;
         background-position: center;
+        height: 100vh;
         
     }
     .card,
