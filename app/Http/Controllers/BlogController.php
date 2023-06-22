@@ -76,10 +76,27 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function update(Request $request, BlogEntry $blog)
+{
+    // Perform authorization checks to ensure the user is an admin
+    if (!Auth::user()->hasRole('admin')) {
+        abort(403); // Unauthorized access
     }
+
+    // Validate the request data
+    $validatedData = $request->validate([
+        'content' => 'required',
+    ]);
+
+    // Update the blog entry
+    $blog->update([
+        'content' => $validatedData['content'],
+    ]);
+
+    // Return a response indicating the update was successful
+    return response()->json(['message' => 'Blog post updated successfully']);
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -88,10 +105,6 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -101,6 +114,12 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+
+        // Add authorization logic here to check if the user has admin role or appropriate permissions to delete the blog post
+
+        $blog->delete();
+
+        return response()->json(['message' => 'Blog post deleted successfully']);
     }
 }

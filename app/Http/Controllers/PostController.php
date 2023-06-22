@@ -92,7 +92,7 @@ class PostController extends Controller
         if (auth()->user()->id !== $post->user_id) {
             return redirect()->back()->with('error', 'You are not authorized to delete this post.');
         }
-
+        $post->votes()->delete();
         // Delete the post
         $post->delete();
 

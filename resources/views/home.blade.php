@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
 <style>
+    body {
+          
+          background-image: url('{{ asset('images/background70.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        
+        }
         .virsraksts{
         position: center;
         text-align: center;
@@ -11,13 +18,7 @@
         border-radius:4px;
         margin-bottom: 5px;
     }
-    body {
-        background-image: url('{{ asset('images/background70.jpg') }}');
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        
-    }
+   
     .card,
 .card2 {
     margin: 0 auto; /* Center the card horizontally */

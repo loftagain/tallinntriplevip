@@ -9,8 +9,14 @@
     <!-- Styles -->
     <style>
         body {
+          min-height: 100vh;
           margin: 0;
           font-family: Arial, Helvetica, sans-serif;
+          background-image: url('{{ asset('images/background70.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        
+        
         }
         
         .topnav {
@@ -39,10 +45,10 @@
           text-transform: uppercase;
         }
         </style>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+  {{--  <script src="{{ asset('js/app.js') }}" defer></script>--}}
 </head>
 <body>
     <div id="app">
@@ -53,15 +59,18 @@
                 </a>
                 <!-- Add your navigation links or menus here -->
                 <div class="topnav">
-                    <a class="active" href="{{ route('home') }}">My home</a>
-                    <a href="{{ route('vote') }}">Vote</a>
-                    <a href="{{ route('wall') }}">Wall</a>
-                    <a href="{{ route('about') }}">About Us</a>
+                    <a class="active" href="{{ route('home') }}">{{ __('messages.My home') }}</a>
+                    <a href="{{ route('vote') }}">@lang('messages.Vote')</a>
+                    <a href="{{ route('wall') }}">@lang('messages.Wall')</a>
+                    <a href="{{ route('about') }}">@lang('messages.About Us')</a>
                     <div class="logout">
                        <a> <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Logout</button>
+                            <button type="submit" class="btn btn-danger">@lang('messages.Logout')</button>
                         </form></a>
+                        <a href="{{ route('switch-language', ['locale' => 'lv']) }}">LV</a>
+                        <a href="{{ route('switch-language', ['locale' => 'en']) }}">EN</a>
+
                   </div>
 
 

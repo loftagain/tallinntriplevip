@@ -7,13 +7,13 @@ use App\Http\Controllers\VoteController;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\BlogController;
 
+use App\Http\Controllers\LangController;
+use App\Http\Controllers\LanguageController;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::get('/vote', [PostController::class, 'index'])->name('vote');
 
@@ -42,7 +42,16 @@ Route::post('/posts/{postId}/vote', [App\Http\Controllers\VoteController::class,
 //šeit glabā blog entry
 Route::post('/wall', [App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
 
-//Route::get('/wall', [App\Http\Controllers\BlogController::class, 'wall'])->name('blog.wall');
 
-//?
 Route::post('users/{id}/make-admin', 'UserController@makeAdmin')->name('users.make-admin');
+Route::put('/blogs/{blog}', [App\Http\Controllers\BlogController::class, 'update'])->name('blogs.update');
+
+Route::delete('/blogs/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('blogs.destroy');
+
+
+Route::get('/switch-language/{locale}', [App\Http\Controllers\LanguageController::class, 'switchLanguage'])
+    ->name('switch-language');
+
+  
+Route::get('lang/home', [LangController::class, 'index']);
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');

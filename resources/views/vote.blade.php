@@ -112,9 +112,9 @@
                             @endif
                         </p>
                         
-                        <p class="card-text">Posted by: {{ $post->user->nickname }}</p>
-                        <p class="card-text">Posted on: {{ $post->created_at }}</p>
-                        <p class="card-text">Votes: {{ $post->votes }}</p>
+                        <p class="card-text">@lang('messages.Posted by: '){{ $post->user->nickname }}</p>
+                        <p class="card-text">@lang('messages.Posted on: ') {{ $post->created_at }}</p>
+                        <p class="card-text">@lang('messages.Votes: '){{ $post->votes }}</p>
                         @auth
                             @if ($post->hasVoted)
                                 <button class="btn btn-primary vote-btn" disabled>Already Voted</button>
