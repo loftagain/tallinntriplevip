@@ -113,7 +113,7 @@ p {
                     <div class="card2">
                         <div class="mt-4">
                             
-                            @foreach ($posts as $post)
+                            @foreach ($posts->sortByDesc('created_at') as $post)
                                 <div class="mt-2">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ $post->title }}</h5>

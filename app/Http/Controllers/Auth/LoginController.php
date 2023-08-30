@@ -71,6 +71,6 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         // Redirect to the desired page after logout
-        return view('welcome');
+        return redirect()->intended('/');
     }
 }

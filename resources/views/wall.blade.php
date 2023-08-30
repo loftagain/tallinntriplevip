@@ -149,7 +149,7 @@ margin-top: 20px;
 @endif
 
 <!-- Display existing blog entries -->
-@foreach ($blogs as $blog)
+@foreach ($blogs->sortByDesc('created_at') as $blog)
     <div class="cardblog">
         <div class="blog-content" data-blog-id="{{ $blog->id }}">{!! $blog->content !!}</div>
         @if (Auth::check() && Auth::user()->hasRole('admin'))
